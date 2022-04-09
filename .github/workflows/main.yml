@@ -65,18 +65,22 @@ jobs:
           cd ${{ env.GIT_REPO_NAME }}
           git pull origin main
           git rm -r --cached source
-          git commit -m 'Clean'
-          git push -u origin main
-        
-      - name: Bilibiliupdate
-        run: |
           mkdir -p source\_posts
           python3 main.py
-          git config --global user.name $GIT_USER
-          git config --global user.email $GIT_EMAIL
           git add -A
           git commit -m 'Bilibili_update'
           git push origin main
+          
+        
+#       - name: Bilibiliupdate
+#         run: |
+#           mkdir -p source\_posts
+#           python3 main.py
+#           git config --global user.name $GIT_USER
+#           git config --global user.email $GIT_EMAIL
+#           git add -A
+#           git commit -m 'Bilibili_update'
+#           git push origin main
           
       - name: Install dependencies
         run: |
