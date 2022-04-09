@@ -61,26 +61,23 @@ jobs:
           ssh-keyscan -t rsa gitee.com >> ~/.ssh/known_hosts
           git config --global user.name $GIT_USER
           git config --global user.email $GIT_EMAIL
+
+
+          
+        
+      - name: Bilibiliupdate
+        run: |
           git clone ${{ env.GIT_SOURCE_REPO }}
           cd ${{ env.GIT_REPO_NAME }}
           git pull origin main
           git rm -r --cached source
           mkdir -p source\_posts
           python3 main.py
+          git config --global user.name $GIT_USER
+          git config --global user.email $GIT_EMAIL
           git add -A
           git commit -m 'Bilibili_update'
           git push origin main
-          
-        
-#       - name: Bilibiliupdate
-#         run: |
-#           mkdir -p source\_posts
-#           python3 main.py
-#           git config --global user.name $GIT_USER
-#           git config --global user.email $GIT_EMAIL
-#           git add -A
-#           git commit -m 'Bilibili_update'
-#           git push origin main
           
       - name: Install dependencies
         run: |
