@@ -38,8 +38,8 @@ jobs:
         run: |
           git config --global user.email "lylelove@163.com"
           git config --global user.name "lylelove"
-          git clone $GIT_SOURCE_REPO
-          cd $GIT_REPO_NAME
+          git clone ${{ env.GIT_DEPLOY_REPO }}
+          cd ${{ env.GIT_REPO_NAME }}
           git pull origin main
           git rm -r --cached source
           git commit -m 'Clean'
