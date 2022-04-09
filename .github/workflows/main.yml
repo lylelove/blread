@@ -67,8 +67,6 @@ jobs:
         
       - name: Bilibiliupdate
         run: |
-          git pull origin main
-          git rm -r --cached source
           mkdir -p source\_posts
           python3 main.py
           git config --global user.name $GIT_USER
