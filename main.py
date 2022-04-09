@@ -4,17 +4,16 @@ import html2text
 import requests
 import sys
 
-blreadid = sys.argv[1]
+mid = sys.argv[1]
 
 
-def bl_update(read):
+def bl_update(mid):
     read_list = []
     date_list = []
-    url = "https://api.bilibili.com/x/article/list/web/articles?id=" + str(read) + "&jsonp=jsonp"
+    url = "https://api.bilibili.com/x/space/article?mid=" + str(mid) + "&jsonp=jsonp"
     hd = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) '
                         'Chrome/99.0.4844.82 Safari/537.36'}
     response = requests.get(url, headers=hd)
-    print(response.json())
     articles = response.json()
     articleslist = articles['data']['articles']
     for i in range(len(articleslist)):
@@ -37,7 +36,6 @@ def bl_update(read):
             fp.write('\n')
             fp.write('---')
             fp.write('\n')
+            fp.write('<!-- more -->')
             fp.write(read_list[i])
-
-
-bl_update(blreadid)
+bl_update(mid)
