@@ -34,7 +34,7 @@ jobs:
         
       - name: Bilibiliupdate
         run: |
-          mkdir -p source\_posts
+          mkdir -p source/_posts
           python3 main.py
           git config --global user.name $GIT_USER
           git config --global user.email $GIT_EMAIL
