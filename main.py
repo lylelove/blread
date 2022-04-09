@@ -40,4 +40,4 @@ def bl_update(read):
             fp.write(read_list[i])
 
 
-blreadid(blreadid)
+bl_update(blreadid)
