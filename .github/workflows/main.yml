@@ -1,24 +1,72 @@
-name: Build and Deploy
+name: Hexo Auto Deploy
+
 on:
-  push:	
-    branches:	
+  push:
+    branches:
       - main
   workflow_dispatch:
-  
-jobs:
-  build-and-deploy:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout
-      uses: actions/checkout@master
-      with:
-        submodules: true
-        
-    - name: Build and Deploy
-      uses: solybum/hexo-deploy@master
-      env:
-        PERSONAL_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-        PUBLISH_REPOSITORY: lylelove/blread # The repository the action should deploy to.
-        BRANCH: gh_page  # The branch the action should deploy to.
-        PUBLISH_DIR: ./public # The folder the action should deploy.
 
+# 这里放环境变量,需要替换成你自己的
+env:
+  # Hexo 编译后使用此 git 用户部署到 github 仓库
+  GIT_USER: lylelove
+  # Hexo 编译后使用此 git 邮箱部署到 github 仓库
+  GIT_EMAIL: lylelove@163.com
+  # Hexo 编译后要部署的 github 仓库
+  GIT_DEPLOY_REPO: lylelove/blread
+  # Hexo 编译后要部署到的分支
+  GIT_DEPLOY_BRANCH: gh_page
+  # 注意替换为你的 GitHub 源仓库地址
+  GIT_SOURCE_REPO: git@github.com:lylelove/blread.git
+jobs:
+  build:
+    name: Build on node ${{ matrix.node_version }} and ${{ matrix.os }}
+    runs-on: ubuntu-latest
+    if: github.event.repository.owner.id == github.event.sender.id
+    strategy:
+      matrix:
+        os: [ubuntu-18.04]
+        node_version: [12.x]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Checkout deploy repo
+        uses: actions/checkout@v2
+        with:
+          repository: ${{ env.GIT_DEPLOY_REPO }}
+          ref: ${{ env.GIT_DEPLOY_BRANCH }}
+          path: .deploy_git
+
+      - name: Use Node.js ${{ matrix.node_version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node_version }}
+
+      - name: Configuration environment
+        env:
+          HEXO_DEPLOY_PRI: ${{secrets.HEXO_DEPLOY_PRI}}
+        run: |
+          sudo timedatectl set-timezone "Asia/Shanghai"
+          mkdir -p ~/.ssh/
+          echo "$HEXO_DEPLOY_PRI" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
+          ssh-keyscan -t rsa e.coding.net >> ~/.ssh/known_hosts
+          ssh-keyscan -t rsa gitee.com >> ~/.ssh/known_hosts
+          git config --global user.name $GIT_USER
+          git config --global user.email $GIT_EMAIL
+
+      - name: Install dependencies
+        run: |
+          npm install hexo-cli -g
+          npm install
+          npm uninstall hexo-generator-index --save
+          npm install hexo-baidu-url-submit hexo-generator-index2 hexo-symbols-count-time hexo-blog-encrypt hexo-deployer-git --save
+          cp zh-CN.yml node_modules/hexo-theme-next/languages/
+
+      - name: Deploy hexo
+        run: |
+          npm run deploy
+		  
