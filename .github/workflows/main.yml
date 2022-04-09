@@ -18,6 +18,8 @@ env:
   GIT_DEPLOY_BRANCH: gh_page
   # 注意替换为你的 GitHub 源仓库地址
   GIT_SOURCE_REPO: git@github.com:lylelove/blread.git
+  # 哔哩哔哩专栏id
+  BILIBILI_READ_ID: 214206
 jobs:
   build:
     name: Build on node ${{ matrix.node_version }} and ${{ matrix.os }}
@@ -34,14 +36,14 @@ jobs:
         
       - name: Bilibiliupdate
         run: |
-          mkdir -p source\_posts
-          python3 main.py
-          git config --global user.email "lylelove@163.com"
-          git config --global user.name "lylelove"
+          mkdir -p source/_posts
+          python3 main.py '${{ env.BILIBILI_READ_ID }}' '${{ env.GIT_DEPLOY_REPO }}' 
+          git config --global user.name $GIT_USER
+          git config --global user.email $GIT_EMAIL
           git add -A
           git commit -m 'Bilibili_update'
           git push origin main
-
+          
       - name: Checkout deploy repo
         uses: actions/checkout@v2
         with:
@@ -67,14 +69,12 @@ jobs:
           ssh-keyscan -t rsa gitee.com >> ~/.ssh/known_hosts
           git config --global user.name $GIT_USER
           git config --global user.email $GIT_EMAIL
-
       - name: Install dependencies
         run: |
           npm install hexo-cli -g
           npm install
           npm uninstall hexo-generator-index --save
           npm install hexo-baidu-url-submit hexo-generator-index2 hexo-symbols-count-time hexo-blog-encrypt hexo-deployer-git --save
-
       - name: Deploy hexo
         run: |
           npm remove hexo-baidu-url-submit
