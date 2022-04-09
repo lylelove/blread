@@ -1,0 +1,24 @@
+name: Build and Deploy
+on:
+  push:	
+    branches:	
+      - main
+  workflow_dispatch:
+  
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@master
+      with:
+        submodules: true
+        
+    - name: Build and Deploy
+      uses: solybum/hexo-deploy@master
+      env:
+        PERSONAL_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        PUBLISH_REPOSITORY: lylelove/blread # The repository the action should deploy to.
+        BRANCH: gh_page  # The branch the action should deploy to.
+        PUBLISH_DIR: ./public # The folder the action should deploy.
+
