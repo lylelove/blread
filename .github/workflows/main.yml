@@ -18,6 +18,8 @@ env:
   GIT_DEPLOY_BRANCH: gh_page
   # 注意替换为你的 GitHub 源仓库地址
   GIT_SOURCE_REPO: git@github.com:lylelove/blread.git
+  # Github源仓库名称
+  GIT_REPO_NAME: blread
 jobs:
   build:
     name: Build on node ${{ matrix.node_version }} and ${{ matrix.os }}
@@ -31,6 +33,17 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+        
+      - name: Clean
+        run: |
+          git config --global user.email "lylelove@163.com"
+          git config --global user.name "lylelove"
+          git clone $GIT_SOURCE_REPO
+          cd $GIT_REPO_NAME
+          git pull origin main
+          git rm -r --cached source
+          git commit -m 'Clean'
+          git push -u origin main
         
       - name: Bilibiliupdate
         run: |
