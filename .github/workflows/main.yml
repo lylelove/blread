@@ -64,7 +64,6 @@ jobs:
           npm install
           npm uninstall hexo-generator-index --save
           npm install hexo-baidu-url-submit hexo-generator-index2 hexo-symbols-count-time hexo-blog-encrypt hexo-deployer-git --save
-          cp zh-CN.yml node_modules/hexo-theme-next/languages/
 
       - name: Deploy hexo
         run: |
