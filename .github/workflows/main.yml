@@ -19,7 +19,7 @@ env:
   # 注意替换为你的 GitHub 源仓库地址
   GIT_SOURCE_REPO: git@github.com:lylelove/blread.git
   # 哔哩哔哩专栏id
-  BILIBILI_MID: 2250815
+  BILIBILI_MID: 34828543
 jobs:
   build:
     name: Build on node ${{ matrix.node_version }} and ${{ matrix.os }}
