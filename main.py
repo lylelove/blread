@@ -15,7 +15,7 @@ def bl_update(mid):
     articles = response.json()
     articleslist = articles['data']['articles']
     for i in range(len(articleslist)):
-        response = requests.get("https://www.bilibili.com/read/cv" + str(articleslist[i]['id']), headers=hd)
+        response = requests.get("https://www.bilibili.com/read/cv" + str(articleslist[i]['id']))
         info = response.text
         pat_read = r'<div id="article-content" class="article-content">(.*?)<div class="article-footer-box">'
         pat_date = r'<span class="publish-text" .*?>(.*?)</span>'
