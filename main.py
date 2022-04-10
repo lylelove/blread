@@ -39,6 +39,7 @@ def bl_update(mid):
             fp.write('\n')
             fp.write('<!-- more -->')
             fp.write('\n')
+            fp.write('\n')
             fp.write(read_list[i])
 
 
