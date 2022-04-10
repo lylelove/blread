@@ -33,6 +33,8 @@ def bl_update(mid):
             fp.write('\n')
             fp.write('tags: ' + articleslist[i]['category']['name'])
             fp.write('\n')
+            fp.write('hidden: false')
+            fp.write('\n')
             fp.write('---')
             fp.write('\n')
             fp.write('<meta name="referrer" content="no-referrer" />')
