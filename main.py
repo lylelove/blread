@@ -34,6 +34,8 @@ def bl_update(mid):
             fp.write('\n')
             fp.write('---')
             fp.write('\n')
+            fp.write('<meta name="referrer" content="no-referrer" />')
+            fp.write('\n')
             fp.write('<!-- more -->')
             fp.write('\n')
             fp.write(read_list[i])
