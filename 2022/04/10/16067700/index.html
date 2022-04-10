@@ -9,7 +9,7 @@
 
 <link rel="alternate" href="/blread/atom.xml" title="竟何" type="application/atom+xml">
 <meta name="theme-color" content="#5badf0">
-<title>竟何</title><meta name="robots" content="noindex">
+<title>以哔哩哔哩专栏为后端进行Github Action自动部署的Hexo博客 - 竟何</title>
 <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 <link rel="shortcut icon" href="/blread/favicon.png">
 
@@ -31,12 +31,43 @@
     <article class="post">
     <header>
         
+            <h1>以哔哩哔哩专栏为后端进行Github Action自动部署的Hexo博客</h1>
+        
         <h2 class="headline">Apr 10 2022
         
         </h2>
     </header>
 </article>
-<section id="post-body"><!-- flag of hidden posts --></section>
+<section id="post-body"><meta name="referrer" content="no-referrer" />
+<span id="more"></span>
+
+  
+
+<p><img src="//i0.hdslb.com/bfs/article/cf5f3434bf6bff0744d9ea4f6dfcf7ab379dca53.png"></p>
+<p>本项目通过Github<br>Action运行python文件，自动爬取哔哩哔哩专栏文章并清洗写入markdown文件中，清洗操作参考了http2text库，并略微进行修改。</p>
+<p>在清洗并存储于_post文件夹后通过Github Action自动实现Hexo部署。</p>
+<h1 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始"></a>快速开始</h1><h1 id="Github-Action-相关"><a href="#Github-Action-相关" class="headerlink" title="Github Action 相关"></a>Github Action 相关</h1><p>Fork本项目，自行修改项目名称。</p>
+<p>后修改.github&#x2F;workflows&#x2F;main.yml文件：</p>
+<p>获取部署密钥，具体教程请自行百度Hexo搭建教程</p>
+<p>复制 <strong>私钥</strong> （.pub）文件内容，在 仓库 <code>Settings</code> -&gt; <code>Secrets</code> -&gt; <code>New repository secret</code><br>页面上添加。</p>
+<ol>
+<li><p>在 <code>Name</code> 输入框填写 <code>HEXO_DEPLOY_PRI</code></p>
+</li>
+<li><p>在 <code>Value</code> 输入框填写私钥内容</p>
+</li>
+</ol>
+<h1 id="Hexo相关"><a href="#Hexo相关" class="headerlink" title="Hexo相关"></a>Hexo相关</h1><p>自行修改_config.yml文件。</p>
+<h1 id="Github-Pages相关"><a href="#Github-Pages相关" class="headerlink" title="Github Pages相关"></a>Github Pages相关</h1><p>上述步骤均完成后，自行进行第一次Action。</p>
+<p>成功运行后开启Pages功能，Source选择gh_page。</p>
+<h1 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h1><p>哔哩哔哩专栏中删除的文章并没有在GitHub中删除，本项目只是使其在首页中隐藏，若要完全删除需自行在source&#x2F;_posts中删除。</p>
+<p>本项目无法实现哔哩哔哩专栏与Hexo博客同步更新，默认同步时间间隔是两个小时，可在.github&#x2F;workflows&#x2F;main.yml中进行修改：</p>
+<p>其他问题请提Issue，欢迎star本项目。</p>
+</section>
+    
+        
+        <h2 class="footline">
+            <a href="/blread/tags/数码/#数码">数码</a>
+        </h2>
     
 
     <footer id="post-meta" class="clearfix">
@@ -48,7 +79,7 @@
         </div>
         </a>
         <section id="sharing">
-            <a title="Share to Twitter" class="twitter" target="_blank" rel="noopener" href="https://twitter.com/intent/tweet?text=https://www.lylelove.top/blread/2022/04/10/15951866/ - (No Title) @"><span class="icon-twitter">tweet</span></a>
+            <a title="Share to Twitter" class="twitter" target="_blank" rel="noopener" href="https://twitter.com/intent/tweet?text=https://www.lylelove.top/blread/2022/04/10/16067700/ - 以哔哩哔哩专栏为后端进行Github Action自动部署的Hexo博客 @"><span class="icon-twitter">tweet</span></a>
             <a title="Share to Facebook" class="facebook" href="#" onclick="
                 window.open(
                   'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),
@@ -69,6 +100,8 @@
       var cmts={
         load:function cmts(){
           var gitment = new Gitment({
+          
+            id: "以哔哩哔哩专栏为后端进行Github Action自动部署的Hexo博客",
           
             owner: "",
             repo: "",
