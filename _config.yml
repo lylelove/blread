@@ -105,3 +105,13 @@ deploy:
   type: "git"
   repo: https://github.com/lylelove/blread.git
   branch: gh_page
+
+# 隐藏文章使用 hexo-hide-posts
+hide_posts:
+  enable: true
+  filter: hidden
+  # 指定你想要传递隐藏文章的 generator，比如让所有隐藏文章在存档页面可见
+  # 常见的 generators 有：index, tag, category, archive, sitemap, feed, etc.
+  public_generators: []
+  # 为隐藏的文章添加 noindex meta 标签，阻止搜索引擎收录
+  noindex: true
