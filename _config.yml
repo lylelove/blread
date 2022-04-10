@@ -123,5 +123,5 @@ plugin:
 #Feed Atom
 feed:
   type: atom
-  path: atom.xml
+  path: blread/atom.xml
   limit: 20

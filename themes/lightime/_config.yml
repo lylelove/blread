@@ -2,9 +2,9 @@ menu: #TITLE: link
   About: about/
   Archives: archives/
 
-profile_link: https://www.lylelove.top
+profile_link: https://www.lylelove.top/blread
 avatar: https://avatars.githubusercontent.com/u/61548984?v=4
-
+favicon: https://www.lylelove.top/media/website/90.png
 gitment:
   username:
   repo:
