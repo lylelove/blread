@@ -37,7 +37,7 @@ jobs:
       - name: Bilibiliupdate
         run: |
           mkdir -p source/_posts
-          python3 main.py '${{ env.BILIBILI_MID }}' 
+          python3 main.py '${{ env.BILIBILI_MID }}' '${{ env.GIT_DEPLOY_REPO }}' 
           git config --global user.name $GIT_USER
           git config --global user.email $GIT_EMAIL
           git add -A
